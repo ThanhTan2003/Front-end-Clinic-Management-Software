@@ -4,6 +4,7 @@ import { faMagnifyingGlass, faRotate, faMessage, faCommentDots, faCircleInfo, fa
 
 import { getTags } from '../../../../services/ZaloOAService';
 import Pagination from "../../../../components/Pagination";
+import { getToken } from "../../../../services/localStorageService";
 
 // Filter Section
 const FilterSection = ({
@@ -87,10 +88,26 @@ const DataTable = () => {
   };
 
 
-  const fetchData = async () => {
+  const fetchData = async (accessToken) => {
     const response = await fetch(
-      `${getTags}?keyword=${keyword}&page=${currentPage}&size=${pageSize}`
+      `${getTags}?keyword=${keyword}&page=${currentPage}&size=${pageSize}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'ngrok-skip-browser-warning': 'true'
+        }
+      }
     );
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      throw new TypeError('Response is not JSON');
+    }
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
     const data = await response.json();
     setTags(data.data);
     setTotalPages(data.totalPages);
@@ -98,7 +115,14 @@ const DataTable = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    const accessToken = getToken();
+        //     if (!accessToken) {
+        //         navigate("/login");
+        //     } else {
+        //         getUserDetails(accessToken);
+        //         getSpecialties(accessToken);
+        // }
+    fetchData(accessToken);
   }, [keyword, currentPage, pageSize]);
 
   const handleSearch = () => {
