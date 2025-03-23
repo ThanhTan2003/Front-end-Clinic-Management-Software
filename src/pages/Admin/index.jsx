@@ -30,7 +30,7 @@ const Sidebar = ({ selectedPage, setSelectedPage }) => {
 
   const handleLogout = () => {
     logOut();
-    navigate('/login');
+    navigate('/admin/login');
   };
 
   return (
@@ -51,7 +51,7 @@ const Sidebar = ({ selectedPage, setSelectedPage }) => {
             className={`cursor-pointer font-bold p-3 rounded ${selectedPage === item.id ? 'bg-blue-100 text-blue-800' : 'text-blue-900 hover:bg-blue-200 hover:text-blue-600'}`}
             onClick={() => {
               setSelectedPage(item.id);
-              navigate(`/${item.path}`);
+              navigate(`/admin/${item.path}`);
             }}
           >
             <FontAwesomeIcon icon={item.icon} /> &nbsp; {item.label}
