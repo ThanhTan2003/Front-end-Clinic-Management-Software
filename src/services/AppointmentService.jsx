@@ -8,6 +8,11 @@ export const searchServiceCategories          = `${CONFIG.API_GATEWAY}${SERVICE_
 const SERVICE_BASE_URL    = '/api/v1/appointment/service'
 export const searchServices         = `${CONFIG.API_GATEWAY}${SERVICE_BASE_URL}/search`
 
+// Doctor
+const DOCTOR_BASE_URL    = '/api/v1/appointment/doctor'
+export const searchDoctors         = `${CONFIG.API_GATEWAY}${DOCTOR_BASE_URL}/search`
+
 // DoctorService
 const DOCTOR_SERVICE_BASE_URL    = '/api/v1/appointment/doctor-service'
-export const searchByService         = `${CONFIG.API_GATEWAY}${DOCTOR_SERVICE_BASE_URL}//search-by-service`
+export const searchDoctorServiceByService   = `${CONFIG.API_GATEWAY}${DOCTOR_SERVICE_BASE_URL}/search-by-service`
+export const searchDoctorServiceByDoctor    = `${CONFIG.API_GATEWAY}${DOCTOR_SERVICE_BASE_URL}/search-by-doctor`

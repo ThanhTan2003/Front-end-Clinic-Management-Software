@@ -4,6 +4,10 @@ import { Link, Routes, Route, useLocation, Outlet } from "react-router-dom";
 import SeviceCaterory from './AppointmentBooking/ServiceBooking/ServiceCaterory'
 import ServiceBooking_Service from'./AppointmentBooking/ServiceBooking/Service'
 import ServiceBooking_DoctorService from'./AppointmentBooking/ServiceBooking/DoctorService'
+
+import DoctorBooking_Doctor from './AppointmentBooking/DoctorBooking/Doctor'
+import DoctorBooking_DoctorService from './AppointmentBooking/DoctorBooking/DoctorService'
+
 import NotFound from "../../components/NotFound"
 
 function MainContent() {
@@ -18,6 +22,13 @@ function MainContent() {
                         </Route>
                     </Route>
                 </Route>
+
+                <Route path="doctor-booking" element={<DoctorBooking_Doctor />}>
+                    <Route path=":doctorId" element={<DoctorBooking_DoctorService />}>
+                        
+                    </Route>
+                </Route>
+
             </Routes>
         </div>
     )

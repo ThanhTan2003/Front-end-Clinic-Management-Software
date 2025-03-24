@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link, Outlet, useParams } from "react-router-dom";
 
-import { searchDoctorServiceByService } from '../../../../services/AppointmentService'
+import { searchDoctors } from '../../../../services/AppointmentService'
 import { getToken } from "../../../../services/localStorageService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,7 +9,7 @@ import { faCaretDown, faMagnifyingGlass, faArrowLeft, faFileMedical } from "@for
 import ModalDetail from '../Compoments/ModalDetail';
 
 export default function MainContent() {
-    const [doctorServices, setDoctorServices] = useState([]);
+    const [doctors, setDoctors] = useState([]);
     const [totalPages, setTotalPages] = useState(1);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(5); // Mỗi lần lấy 5 dịch vụ
@@ -21,18 +21,16 @@ export default function MainContent() {
 
     const timeoutRef = useRef(null);  // Dùng useRef để lưu timeout
 
-    const { serviceCategoryId } = useParams();
-    const { serviceId } = useParams();
-    const { doctorServiceId } = useParams();
+    const { doctorId } = useParams();
 
     const navigate = useNavigate();
 
     // Hàm lấy danh sách dịch vụ
-    const fetchDoctorServices = async (accessToken) => {
+    const fetchDoctors = async (accessToken) => {
         setLoading(true);
         try {
             const response = await fetch(
-                `${searchDoctorServiceByService}?keyword=${keyword}&serviceId=${serviceId}&page=${currentPage}&size=${pageSize}`,
+                `${searchDoctors}?keyword=${keyword}&page=${currentPage}&size=${pageSize}`,
                 {
                     method: "GET",
                     headers: {
@@ -47,9 +45,9 @@ export default function MainContent() {
 
             // Nếu muốn chỉ tải thêm các dịch vụ, giữ nguyên các dịch vụ cũ
             if (currentPage === 1) {
-                setDoctorServices(data.data || []); // Nếu là trang đầu tiên, thay thế danh sách
+                setDoctors(data.data || []); // Nếu là trang đầu tiên, thay thế danh sách
             } else {
-                setDoctorServices(prevCategories => [...prevCategories, ...(data.data || [])]); // Nếu là các trang tiếp theo, thêm mới vào
+                setDoctors(prevCategories => [...prevCategories, ...(data.data || [])]); // Nếu là các trang tiếp theo, thêm mới vào
             }
 
         } catch (error) {
@@ -61,7 +59,7 @@ export default function MainContent() {
 
     useEffect(() => {
         const accessToken = getToken();
-        fetchDoctorServices(accessToken);
+        fetchDoctors(accessToken);
     }, [currentPage, isSearch]);
 
     // Hàm xử lý từ khóa tìm kiếm và debounce
@@ -109,16 +107,9 @@ export default function MainContent() {
     return (
         <>
             {
-                !doctorServiceId && (
+                !doctorId && (
                     <div>
-                        <div className="text-center pb-2 p-4">
-                            <button
-                                onClick={() => navigate(-1)}
-                                className="w-full h-12 border-2 border-cyan-700 text-cyan-700 font-bold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
-                            >
-                                <FontAwesomeIcon icon={faArrowLeft} /> &nbsp; Quay lại
-                            </button>
-                        </div>
+                        
                         {/* Tiêu đề */}
                         <div className="text-center pb-2 p-4">
                             <h1
@@ -156,9 +147,9 @@ export default function MainContent() {
 
                         {/* Danh sách bác sĩ */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
-                            {doctorServices.map((doctorService) => (
+                            {doctors.map((doctor) => (
                                 <div
-                                    key={doctorService.id}
+                                    key={doctor.id}
                                     className="bg-white rounded-lg shadow-md p-3 flex flex-col justify-between relative border border-sky-300"
                                     
                                 >
@@ -167,14 +158,14 @@ export default function MainContent() {
                                         {/* Hình ảnh bác sĩ (chiếm 1/3 chiều rộng) */}
                                         <div className="w-1/3 h-auto flex-shrink-0 overflow-hidden rounded-l-lg ">
                                             <img
-                                                src={doctorService.doctorResponse.image || (doctorService.doctorResponse.gender === "Nam"
+                                                src={doctor.image || (doctor.gender === "Nam"
                                                     ? "/images/default-male-doctor.jpg"
                                                     : "/images/default-female-doctor.jpg")}
                                                 alt="Ảnh bác sĩ"
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => {
                                                     e.target.onerror = null;
-                                                    e.target.src = doctorService.doctorResponse.gender === "Nam"
+                                                    e.target.src = doctor.gender === "Nam"
                                                         ? "/images/default-male-doctor.jpg"
                                                         : "/images/default-female-doctor.jpg";
                                                 }}
@@ -184,27 +175,23 @@ export default function MainContent() {
                                         {/* Nội dung bác sĩ (chiếm 2/3 chiều rộng) */}
                                         <div className="flex-1">
                                             <h4 className="text-lg font-bold text-sky-800">
-                                                {doctorService.doctorResponse.name.toUpperCase()}
+                                                {doctor.name.toUpperCase()}
                                             </h4>
-                                            <p className="text-sm text-gray-600">
-                                                <span className="font-semibold">Giới tính:</span> {doctorService.doctorResponse.gender || "Chưa cập nhật"}
+                                            <p className="text-sm text-amber-800">
+                                                <span className="font-semibold">Giới tính:</span> {doctor.gender || "Chưa cập nhật"}
                                             </p>
-                                            <p className="text-sm text-gray-600">
-                                                <span className="font-semibold">Dịch vụ:</span> {doctorService.serviceResponse.serviceName || "Chưa cập nhật"}
-                                            </p>
-                                            <p className="text-sm text-yellow-800">
-                                                <span className="font-semibold">Phí khám bệnh: </span>
-                                                <span>{doctorService.serviceResponse.price || "Liên hệ"}</span>
+                                            <p className="text-sm text-gray-700 mt-1">
+                                            <span className="font-semibold">Chuyên môn:</span> {doctor.nameOfServiceCategory || "..."}
                                             </p>
                                             {/* Dòng 2: Nút hành động */}
                                             <div className="flex gap-2 justify-end mt-3 ">
                                                 <button
-                                                    onClick={() => openModal(doctorService.doctorResponse)} // Mở modal khi nhấn nút "Chi tiết"
+                                                    onClick={() => openModal(doctor)} // Mở modal khi nhấn nút "Chi tiết"
                                                     className="w-20 h-10 border-2 border-cyan-700 text-cyan-700 font-semibold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
                                                 >
                                                     Chi tiết
                                                 </button>
-                                                <Link to={`${doctorService.id}`}>
+                                                <Link to={`${doctor.id}`}>
                                                     <button className="ml-2 w-24 h-10 bg-gradient-to-r from-cyan-600 to-sky-700 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-800 hover:to-blue-900 transition duration-300">
                                                         Chọn
                                                     </button>
