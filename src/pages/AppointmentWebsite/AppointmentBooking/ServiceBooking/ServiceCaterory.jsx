@@ -116,7 +116,7 @@ export default function DanhSachDichVu() {
                                     WebkitTextFillColor: "transparent",
                                 }}
                             >
-                                CHỌN DỊCH VỤ
+                                CHỌN LOẠI DỊCH VỤ
                             </h1>
                             <div className="mt-2 w-32 mx-auto h-1 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-full"></div>
                         </div>
@@ -146,7 +146,7 @@ export default function DanhSachDichVu() {
                             {serviceCategories.map((category) => (
                                 <div
                                     key={category.id}
-                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-sky-600"
+                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-sky-300"
                                     style={{ minHeight: "180px" }}
                                 >
                                     <div className="flex items-center gap-6 mb-6">
@@ -174,13 +174,13 @@ export default function DanhSachDichVu() {
                                     <div className="flex gap-2 justify-end">
                                         <button
                                             onClick={() => openModal(category)}  // Mở modal khi nhấn nút Chi tiết
-                                            className="w-28 h-10 border-2 border-cyan-700 text-cyan-700 font-semibold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
+                                            className="w-20 h-10 border-2 border-cyan-700 text-cyan-700 font-semibold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
                                         >
                                             Chi tiết
                                         </button>
                                         <Link to={`${category.id}`}>
-                                            <button className="w-40 h-10 bg-gradient-to-r from-cyan-600 to-sky-700 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-800 hover:to-blue-900 transition duration-300">
-                                                Chọn dịch vụ
+                                            <button className="w-28 h-10 bg-gradient-to-r from-cyan-600 to-sky-700 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-800 hover:to-blue-900 transition duration-300">
+                                                Chọn
                                             </button>
                                         </Link>
                                     </div>

@@ -154,63 +154,69 @@ export default function MainContent() {
                             </button>
                         </div>
 
-                        {/* Danh sách dịch vụ */}
+                        {/* Danh sách bác sĩ */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
                             {doctorServices.map((doctorService) => (
-                                <div key={doctorService.id} className="bg-white rounded-lg shadow-md flex items-center m-1 border border-sky-700">
-                                {/* Hình ảnh bác sĩ */}
-                                <div className="w-40 h-full flex-shrink-0 overflow-hidden rounded-l-lg">
-                                    <img
-                                        src={doctorService.doctorResponse.image || (doctorService.doctorResponse.gender === "Nam"
-                                            ? "/images/default-male-doctor.jpg"
-                                            : "/images/default-female-doctor.jpg")}
-                                        alt="Ảnh bác sĩ"
-                                        className="w-full h-full object-cover"
-                                        onError={(e) => {
-                                            e.target.onerror = null;
-                                            e.target.src = doctorService.doctorResponse.gender === "Nam"
-                                                ? "/images/default-male-doctor.jpg"
-                                                : "/images/default-female-doctor.jpg";
-                                        }}
-                                    />
-                                </div>
-                            
-                                {/* Nội dung bác sĩ */}
-                                <div className="flex-1 p-4">
-                                    <h4 className="text-xl font-bold text-sky-800">
-                                        {doctorService.doctorResponse.name.toUpperCase()}
-                                    </h4>
-                                    <br />
-                                    <p className="text-lg text-gray-600">
-                                        <span className="font-semibold">Giới tính:</span> {doctorService.doctorResponse.gender || "Chưa cập nhật"}
-                                    </p>
-                                    <p className="text-lg text-gray-600">
-                                        <span className="font-semibold">Dịch vụ:</span> {doctorService.serviceResponse.serviceName || "Chưa cập nhật"}
-                                    </p>
-                                    <p className="text-lg text-yellow-800">
-                                        <span className="font-semibold">Phí khám bệnh / dịch vụ: </span> 
-                                        <span className="">{doctorService.serviceResponse.price || "Liên hệ"}</span>
-                                    </p>
-                                    <br />
-                                    <div className="mt-4 flex justify-end">
-                                        <button
-                                            onClick={() => openModal(doctorService.doctorResponse)} // Mở modal khi nhấn nút "Chi tiết"
-                                            className="w-28 h-10 border-2 border-cyan-700 text-cyan-700 font-semibold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
-                                        >
-                                            Chi tiết
-                                        </button>
-                                        <Link to={`${doctorService.id}`}>
-                                            <button className="ml-2 w-32 h-10 bg-gradient-to-r from-cyan-600 to-sky-700 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-800 hover:to-blue-900 transition duration-300">
-                                                Chọn bác sĩ
-                                            </button>
-                                        </Link>
+                                <div
+                                    key={doctorService.id}
+                                    className="bg-white rounded-lg shadow-md p-3 flex flex-col justify-between relative border border-sky-300"
+                                    
+                                >
+                                    {/* Dòng 1: Hình ảnh bác sĩ và nội dung */}
+                                    <div className="flex items-center gap-6">
+                                        {/* Hình ảnh bác sĩ (chiếm 1/3 chiều rộng) */}
+                                        <div className="w-1/3 h-auto flex-shrink-0 overflow-hidden rounded-l-lg ">
+                                            <img
+                                                src={doctorService.doctorResponse.image || (doctorService.doctorResponse.gender === "Nam"
+                                                    ? "/images/default-male-doctor.jpg"
+                                                    : "/images/default-female-doctor.jpg")}
+                                                alt="Ảnh bác sĩ"
+                                                className="w-full h-full object-cover"
+                                                onError={(e) => {
+                                                    e.target.onerror = null;
+                                                    e.target.src = doctorService.doctorResponse.gender === "Nam"
+                                                        ? "/images/default-male-doctor.jpg"
+                                                        : "/images/default-female-doctor.jpg";
+                                                }}
+                                            />
+                                        </div>
+
+                                        {/* Nội dung bác sĩ (chiếm 2/3 chiều rộng) */}
+                                        <div className="flex-1">
+                                            <h4 className="text-lg font-bold text-sky-800">
+                                                {doctorService.doctorResponse.name.toUpperCase()}
+                                            </h4>
+                                            <p className="text-sm text-gray-600">
+                                                <span className="font-semibold">Giới tính:</span> {doctorService.doctorResponse.gender || "Chưa cập nhật"}
+                                            </p>
+                                            <p className="text-sm text-gray-600">
+                                                <span className="font-semibold">Dịch vụ:</span> {doctorService.serviceResponse.serviceName || "Chưa cập nhật"}
+                                            </p>
+                                            <p className="text-sm text-yellow-800">
+                                                <span className="font-semibold">Phí khám bệnh: </span>
+                                                <span>{doctorService.serviceResponse.price || "Liên hệ"}</span>
+                                            </p>
+                                            {/* Dòng 2: Nút hành động */}
+                                            <div className="flex gap-2 justify-end mt-3 ">
+                                                <button
+                                                    onClick={() => openModal(doctorService.doctorResponse)} // Mở modal khi nhấn nút "Chi tiết"
+                                                    className="w-20 h-10 border-2 border-cyan-700 text-cyan-700 font-semibold rounded-lg bg-white hover:bg-cyan-50 transition duration-300"
+                                                >
+                                                    Chi tiết
+                                                </button>
+                                                <Link to={`${doctorService.id}`}>
+                                                    <button className="ml-2 w-24 h-10 bg-gradient-to-r from-cyan-600 to-sky-700 text-white font-semibold rounded-lg shadow-lg hover:from-cyan-800 hover:to-blue-900 transition duration-300">
+                                                        Chọn
+                                                    </button>
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            
-
                             ))}
                         </div>
+
+
 
                         {/* Pagination for mobile */}
                         {currentPage < totalPages && (
