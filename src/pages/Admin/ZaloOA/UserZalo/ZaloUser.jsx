@@ -270,7 +270,7 @@ const DataTable = () => {
                           </a>
                         </td>
                         <td className="border p-2 text-center w-32 whitespace-nowrap">
-                          <Link to={`/zalo-oa/user/${user.id}`}>
+                          <Link to={`/admin/zalo-oa/user/${user.id}`}>
                             <button className="bg-sky-600 text-white px-3 py-1 rounded border border-sky-600 hover:bg-sky-700">
                               Chi tiết <FontAwesomeIcon icon={faCircleInfo} />
                             </button>

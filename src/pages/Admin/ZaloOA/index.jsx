@@ -28,7 +28,7 @@ function TabMenu({ selectedTab, setSelectedTab }) {
           key={index}
           onClick={() => {
             setSelectedTab(tab.id);
-            navigate(`/zalo-oa/${tab.path}`);
+            navigate(`/admin/zalo-oa/${tab.path}`);
           }}
           className={`py-2 px-4 font-bold rounded ${tab.id === selectedTab ? 'text-blue-600 border border-blue-600 hover:bg-slate-100' : 'hover:bg-blue-700 hover:text-white'}`}
         >
@@ -46,7 +46,7 @@ function Index() {
 
   // Cập nhật selectedTab khi URL thay đổi
   useEffect(() => {
-    const currentTab = tabConfig.find(tab => `/zalo-oa/${tab.path}` === location.pathname);
+    const currentTab = tabConfig.find(tab => `/admin/zalo-oa/${tab.path}` === location.pathname);
     if (currentTab) {
       setSelectedTab(currentTab.id);
     }
