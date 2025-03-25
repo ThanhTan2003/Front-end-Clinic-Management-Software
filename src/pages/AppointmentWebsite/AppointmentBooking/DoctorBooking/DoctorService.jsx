@@ -177,10 +177,10 @@ export default function DanhSachDichVu() {
                                                 {doctorService.serviceResponse.serviceName.toUpperCase()}
                                             </h4>
                                             <p className="text-sm text-gray-700 mt-1">
-                                            <span className="font-semibold">Nhóm:</span> {doctorService.serviceResponse.serviceCategoryResponse.categoryName || "..."}
+                                            <span className="font-semibold">Loại dịch vụ:</span> {doctorService.serviceResponse.serviceCategoryResponse.categoryName || "..."}
                                             </p>
                                             <p className="text-sm text-gray-700 mt-1">
-                                            <span className="font-semibold">Bác sĩ:</span> {doctorService.doctorResponse.name || "..."}
+                                            <span className="font-semibold">Bác sĩ điều trị:</span> {doctorService.doctorResponse.name || "..."}
                                             </p>
                                             <p className="text-sm text-yellow-800">
                                                 <span className="font-semibold">Phí khám bệnh: </span>
