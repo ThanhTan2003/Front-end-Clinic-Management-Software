@@ -7,6 +7,7 @@ import ServiceBooking_DoctorService from'./AppointmentBooking/ServiceBooking/Doc
 
 import DoctorBooking_Doctor from './AppointmentBooking/DoctorBooking/Doctor'
 import DoctorBooking_DoctorService from './AppointmentBooking/DoctorBooking/DoctorService'
+import DoctorSchedule from "./AppointmentBooking/Compoments/DoctorSchedule";
 
 import NotFound from "../../components/NotFound"
 
@@ -18,14 +19,18 @@ function MainContent() {
                 <Route path="service-booking" element={<SeviceCaterory />}>
                     <Route path=":serviceCategoryId" element={<ServiceBooking_Service />}>
                         <Route path=":serviceId" element={<ServiceBooking_DoctorService />}>
+                            <Route path=":doctorServiceId" element={<DoctorSchedule />}>
 
+                            </Route>
                         </Route>
                     </Route>
                 </Route>
 
                 <Route path="doctor-booking" element={<DoctorBooking_Doctor />}>
                     <Route path=":doctorId" element={<DoctorBooking_DoctorService />}>
-                        
+                        <Route path=":doctorServiceId" element={<DoctorSchedule />}>
+                            
+                        </Route>
                     </Route>
                 </Route>
 
