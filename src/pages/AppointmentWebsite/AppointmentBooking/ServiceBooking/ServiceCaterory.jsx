@@ -146,7 +146,7 @@ export default function DanhSachDichVu() {
                             {serviceCategories.map((category) => (
                                 <div
                                     key={category.id}
-                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-sky-100"
+                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-slate-300"
                                     style={{ minHeight: "180px" }}
                                 >
                                     <div className="flex items-center gap-6 mb-6">

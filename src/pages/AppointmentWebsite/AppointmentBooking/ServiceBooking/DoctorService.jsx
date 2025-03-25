@@ -159,7 +159,7 @@ export default function MainContent() {
                             {doctorServices.map((doctorService) => (
                                 <div
                                     key={doctorService.id}
-                                    className="bg-white rounded-lg shadow-md p-3 flex flex-col justify-between relative border border-sky-100"
+                                    className="bg-white rounded-lg shadow-md p-3 flex flex-col justify-between relative border border-slate-300"
                                     
                                 >
                                     {/* Dòng 1: Hình ảnh bác sĩ và nội dung */}
