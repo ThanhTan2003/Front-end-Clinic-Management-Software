@@ -20,10 +20,9 @@ const MainContent = () => {
   // Các trạng thái quản lý
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Modal xác nhận ngày/khung giờ
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false); // Modal thông báo đăng nhập
-  const [notificationMessage, setNotificationMessage] = useState(""); // Thông báo trong modal thông báo
 
   const [selectedDate, setSelectedDate] = useState(null);
+
 
   // Hàm gọi API để lấy availableDays
   const fetchAvailableDays = async (accessToken) => {
@@ -56,30 +55,6 @@ const MainContent = () => {
     setServiceTimeFrameId(timeSlot.id); // Thiết lập serviceTimeFrameId
     console.log(date)
     navigate(`${timeSlot.id}/${date}`); // Điều hướng đến ChonHoSo với serviceTimeFrameId
-  };
-
-  // Hàm xử lý khi xác nhận từ Modal xác nhận
-  const handleConfirm = () => {
-    console.log("Xác nhận chọn ngày:", selectedDate);
-    console.log("Xác nhận chọn TimeSlot:", selectedTimeSlot);
-    setIsModalOpen(false); // Đóng Modal
-  };
-
-  // Hàm xử lý khi đóng Modal xác nhận
-  const handleCloseModal = () => {
-    setSelectedDate(null);
-    setSelectedTimeSlot(null);
-    setIsModalOpen(false);
-  };
-
-  // Hàm xử lý khi đồng ý đăng nhập từ Modal thông báo
-  const handleLoginRedirect = () => {
-    navigate("/login");
-  };
-
-  // Hàm xử lý khi đóng Modal thông báo
-  const handleCloseNotification = () => {
-    setIsNotificationOpen(false);
   };
 
   // Gọi API khi component mount hoặc khi doctorServiceId thay đổi

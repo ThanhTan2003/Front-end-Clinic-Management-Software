@@ -128,8 +128,8 @@ function SchedulePicker({
                 </h1>
                 <div className="mt-2 w-32 mx-auto h-1 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-full"></div>
             </div>
-            <div className="w-full bg-white p-4">
-                <div className="border border-sky-300 rounded-t-md">
+            <div className="w-full p-4">
+                <div className="border border-sky-300 rounded-t-md bg-white">
                 <div className="flex justify-between items-center mb-4 bg-sky-600 p-4">
                     <button
                         onClick={prevMonth}

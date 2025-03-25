@@ -13,7 +13,7 @@ import NotFound from "../../components/NotFound"
 
 function MainContent() {
     return (
-        <div>
+        <div className="bg-slate-50  min-h-screen">
             <Routes>
                 <Route index element={<NotFound />} />
                 <Route path="service-booking" element={<SeviceCaterory />}>

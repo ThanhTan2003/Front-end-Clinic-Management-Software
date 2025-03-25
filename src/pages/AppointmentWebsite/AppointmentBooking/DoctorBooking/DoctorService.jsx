@@ -158,7 +158,7 @@ export default function DanhSachDichVu() {
                             {doctorServices.map((doctorService) => (
                                 <div
                                     key={doctorService.id}
-                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-sky-300"
+                                    className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between relative border border-sky-100"
                                     style={{ minHeight: "180px" }}
                                 >
                                     <div className="flex items-center gap-6 mb-6">
