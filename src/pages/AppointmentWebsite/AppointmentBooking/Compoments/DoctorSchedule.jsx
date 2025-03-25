@@ -90,9 +90,9 @@ const MainContent = () => {
     }
   }, [doctorServiceId]);
 
-  if (loading) {
-    return <div>Đang tải dữ liệu...</div>;
-  }
+//   if (loading) {
+//     return <div>Đang tải dữ liệu...</div>;
+//   }
 
   return (
     <>
