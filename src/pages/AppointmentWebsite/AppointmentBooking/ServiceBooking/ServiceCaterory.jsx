@@ -6,7 +6,7 @@ import { getToken } from "../../../../services/localStorageService";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faMagnifyingGlass, faFileMedical } from "@fortawesome/free-solid-svg-icons";
-import ModalDetail from '../Compoments/ModalDetail';  // Import component ModalDetail
+import ModalDetail from '../Compoments/Booking/ModalDetail';  // Import component ModalDetail
 
 export default function DanhSachDichVu() {
     const [serviceCategories, setServiceCategories] = useState([]);

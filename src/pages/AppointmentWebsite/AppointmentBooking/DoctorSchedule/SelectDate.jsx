@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, Link, Outlet, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronLeft, faChevronRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faChevronLeft, faChevronRight, faArrowLeft, faCircleInfo, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 import { getScheduleByDoctorAndDate } from '../../../../services/AppointmentService'
 import { getToken } from "../../../../services/localStorageService";
@@ -170,7 +170,7 @@ function SchedulePicker({
             const data = await response.json();
             setTimeSlots(
                 data.map((slot) => ({
-                    id: slot.timeFrameResponse.id,
+                    id: slot.id,
                     session: slot.timeFrameResponse.session,
                     name: slot.timeFrameResponse.name,
                 }))
@@ -215,6 +215,32 @@ function SchedulePicker({
                 </h1>
                 <div className="mt-2 w-32 mx-auto h-1 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-full"></div>
             </div>
+
+            <div className="bg-white p-2 border border-sky-300 rounded-md m-4">
+                <div className="text-sm text-gray-600 text-justify">
+                    <FontAwesomeIcon icon={faCircleInfo} /> <b>Phòng Khám Đa Khoa Dân Quý </b>hỗ trợ đặt lịch khám trước hẹn từ <b>1</b> đến <b>30</b> ngày.
+                </div>
+            </div>
+            <div className="flex justify-center space-x-4 mt-4">
+                {/* Hôm nay */}
+                <div className="flex items-center">
+                    <div className="w-6 h-6 bg-red-300 rounded-lg mr-2"></div>
+                    <span className="text-gray-700">Hôm nay</span>
+                </div>
+
+                {/* Còn trống */}
+                <div className="flex items-center">
+                    <div className="w-6 h-6 bg-sky-200 rounded-lg mr-2"></div>
+                    <span className="text-gray-700">Còn trống</span>
+                </div>
+
+                {/* Kín lịch */}
+                <div className="flex items-center">
+                    <div className="w-6 h-6 bg-gray-200 rounded-lg mr-2"></div>
+                    <span className="text-gray-700">Kín lịch</span>
+                </div>
+            </div>
+            {/* Phần dịch vụ và thông tin */}
             <div className="w-full p-4">
                 <div className="border border-sky-300 rounded-t-md bg-white">
                     <div className="flex justify-between items-center mb-4 bg-sky-600 p-4">
@@ -267,7 +293,7 @@ function SchedulePicker({
                                     className={`p-2 rounded-lg ${isToday
                                         ? "bg-red-300 text-white"
                                         : isSelected
-                                            ? "bg-sky-600 text-white font-bold"
+                                            ? "bg-sky-100 text-cyan-700 hover:bg-sky-200 font-semibold"
                                             : isAvailable
                                                 ? "bg-sky-100 text-cyan-700 hover:bg-sky-200 font-semibold"
                                                 : "bg-gray-100 text-gray-400"
@@ -283,6 +309,19 @@ function SchedulePicker({
                             );
                         })}
                     </div>
+                </div>
+            </div>
+            {/* Phần thông báo về khung giờ */}
+            <div className="bg-yellow-50 p-4 border border-yellow-300 rounded-md m-4 mt-2">
+                <div className="text-center text-sm text-gray-600">
+                    Trong trường hợp không chọn được khung giờ, vui lòng gọi đến bộ phận CSKH để được hỗ trợ.
+                </div>
+                <div className="mt-2 text-center">
+                    <a href="tel:02733907909">
+                        <button className="px-4 py-2 border-2 border-cyan-700 text-cyan-700 font-bold rounded-lg  hover:bg-cyan-50">
+                            <FontAwesomeIcon icon={faPhone} /> &nbsp; 0273 3907 909
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

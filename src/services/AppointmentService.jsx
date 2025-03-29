@@ -23,3 +23,10 @@ const DOCTOR_SCHEDULE_BASE_URL                  = '/api/v1/appointment/doctor-sc
 export const getListDayOfWeekByDoctor           = `${CONFIG.API_GATEWAY}${DOCTOR_SCHEDULE_BASE_URL}/get-day-of-week-by-doctor`
 export const getListDayOfWeekByDoctorService    = `${CONFIG.API_GATEWAY}${DOCTOR_SCHEDULE_BASE_URL}/get-day-of-week-by-doctor-service`
 export const getScheduleByDoctorAndDate         = `${CONFIG.API_GATEWAY}${DOCTOR_SCHEDULE_BASE_URL}/doctor`
+export const getDoctorScheduleById                    = `${CONFIG.API_GATEWAY}${DOCTOR_SCHEDULE_BASE_URL}`
+
+// Patient
+const PATIENT_BASE_URL                  = '/api/v1/appointment/patient'
+export const searchPatients             = `${CONFIG.API_GATEWAY}${PATIENT_BASE_URL}/search`
+export const createPatient              = `${CONFIG.API_GATEWAY}${PATIENT_BASE_URL}`
+export const getPatientById             = `${CONFIG.API_GATEWAY}${PATIENT_BASE_URL}`

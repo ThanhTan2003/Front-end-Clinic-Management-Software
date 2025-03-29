@@ -31,7 +31,7 @@ const SelectTime = ({
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-70 z-50">
-            <div className="bg-white rounded-lg shadow-lg w-4/5 p-6">
+            <div className="bg-white rounded-lg shadow-lg w-10/12 p-6 max-h-[90vh] overflow-y-auto">
                 <h1
                     className="text-2xl font-bold relative text-center"
                     style={{
@@ -40,10 +40,10 @@ const SelectTime = ({
                         WebkitTextFillColor: "transparent",
                     }}
                 >
-                    CHỌN KHUNG GIỜ KHÁM
+                    CHỌN KHUNG GIỜ
                 </h1>
-                <div className="mt-2 w-32 mx-auto h-1 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-full"></div>
-                <div className="p-4">
+                <div className="mt-2 w-32 mx-auto h-1 bg-gradient-to-r from-cyan-600 to-blue-800 rounded-full mb-4"></div>
+                <div className="">
                     {timeSlots.length > 0 ? (
                         <>
                             {Object.entries(
@@ -54,13 +54,16 @@ const SelectTime = ({
                                 }, {})
                             ).map(([session, slots]) => (
                                 <div key={session} className="mb-4">
-                                    <h4 className="text-md font-bold text-gray-600 pb-2">Buổi {session}</h4>
-                                    <div className="grid grid-cols-3 gap-2">
+                                    <h4 className="text-md font-bold text-gray-600 pb-2">Buổi {session}:</h4>
+                                    <div className="grid grid-cols-2 gap-2">
                                         {slots.map((slot) => (
                                             <button
                                                 key={slot.id}
                                                 className="p-2 text-center rounded-lg border bg-white text-cyan-700 border-sky-700 hover:bg-sky-100"
-                                                onClick={() => handleTimeSlotClick(slot)} // Gọi hàm khi người dùng click vào khung giờ
+                                                onClick={() =>{ 
+                                                    console.log(slot)
+                                                    handleTimeSlotClick(slot)
+                                                }}
                                             >
                                                 {slot.name}
                                             </button>
@@ -70,7 +73,7 @@ const SelectTime = ({
                             ))}
                             {/* Dòng mô tả múi giờ */}
                             <p className="mt-4 text-base text-gray-500">
-                                Tất cả thời gian theo múi giờ Việt Nam <b>GMT +7</b>
+                                Tất cả theo múi giờ Việt Nam <b>GMT+7</b>
                             </p>
                         </>
                     ) : (
